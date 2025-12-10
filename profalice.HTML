@@ -1,0 +1,119 @@
+<!DOCTYPE html>
+<html lang="pt-br">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Proferssora alice</title>
+</head>
+
+<body>
+    <h1></h1>
+    Insira o nome do aluno: <input type="text" id="ipt_nome">
+    <div id="divNome"></div>
+
+    Insira a primeira nota: <input type="number" id="ipt_n1">
+    <div id="divN1"></div>
+
+    Insira a segunda nota: <input type="number" id="ipt_n2">
+    <div id="divN2"></div>
+
+    Insira a terceira nota: <input type="number" id="ipt_n3">
+    <div id="divN3"></div>
+
+    <button onclick="Cadastrar()">Cadastrar aluno</button>
+    <div id="divmsg"></div><br>
+    <button onclick="listar()">Listar alunos</button>
+    <div id="divlistar"></div><br>
+
+
+
+</body>
+<script>
+    //criando variaveis globais
+    var alunos = []
+
+
+
+    function Cadastrar() {
+
+        //criando variaveis
+        let nome_aluno = ipt_nome.value;
+        let n1 = Number(ipt_n1);
+        let n2 = Number(ipt_n2);
+        let n3 = Number(ipt_n3);
+
+        //limpando as divs de erro a cada vez que o ususario clicar no botão
+        divN1.innerHTML = ""
+        divN2.innerHTML = ""
+        divN3.innerHTML = ""
+        divNome.innerHTML = ""
+
+        //validações
+        let erro = 0
+        if (nome_aluno.length < 9) {
+            divNome.innerHTML = `O nome dever ter no minimo 9 caracteres`
+            console.log("erro nos caracteres")
+            erro++
+        }
+
+        for (let i = 0; i < alunos.length; i++) {
+            if (nome_aluno == alunos[i]) {
+                console.log("erro ao cadastrar")
+                divNome.innerHTML = `O aluno ${nome_aluno} ja esta cadastrado`
+                divmsg.innerHTML = ""
+                erro++
+            }
+        }
+
+        if ((n1 < 0 && n1 > 10) || ipt_n1.value == "") {
+            erro++
+            divN1.innerHTML = `A nota tem que ser maior ou igual a 0 e menor ou igual a 10.`
+            console.log("erro na nota 1")
+        }
+
+        if ((n2 < 0 && n2 > 10) || ipt_n2.value == "") {
+            erro++
+            divN2.innerHTML = `A nota tem que ser maior ou igual a 0 e menor ou igual a 10.`
+            console.log("erro na nota 2")
+        }
+
+        if ((n3 < 0 && n3 > 10) || ipt_n3.value == "") {
+            erro++
+            divN3.innerHTML = `A nota tem que ser maior ou igual a 0 e menor ou igual a 10.`
+            console.log("erro na nota 3")
+        }
+
+        if (erro == 0) {
+            alunos.push(
+                {
+                    nome: ipt_nome.value,
+                    n1: ipt_n1.value,
+                    n2: ipt_n2.value,
+                    n3: ipt_n3.value,
+                });
+
+            alert("tudo certo")
+            console.log(alunos)
+        }
+    }
+
+    function listar() {
+        let ordem = prompt("Voce deseja listas os nomes dos ultimos cadastrados(1) ou dos primeiros(2)?")
+
+        if (ordem == 1) {
+            for (let i = 0; i < alunos.length; i++) {
+                let media = (Number(nota1[i]) + Number(nota2[i]) + Number(nota3[i])) / 3
+                divlistar.innerHTML += `Aluno: ${alunos[i]} – N1: ${nota1[i]} – N2: ${nota2[i]} – N3: ${nota3[i]} – Média: 99,9 – YYYYY <br>`
+            }
+        } else {
+            for (let i = alunos.length - 1; i > 0; i--) {
+                let media = (Number(nota1[i]) + Number(nota2[i]) + Number(nota3[i])) / 3
+                divlistar.innerHTML += `Aluno: ${alunos[i]} – N1: ${nota1[i]} – N2: ${nota2[i]} – N3: ${nota3[i]} – Média: 99,9 – YYYYY <br>`
+            }
+        }
+    }
+
+</script>
+
+</html>
