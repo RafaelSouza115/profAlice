@@ -25,6 +25,8 @@
     <div id="divmsg"></div><br>
     <button onclick="listar()">Listar alunos</button>
     <div id="divlistar"></div><br>
+    <button onclick="aluno()">ver aluno</button>
+    <div id="divAluno"></div><br>
 
 
 
@@ -32,8 +34,6 @@
 <script>
     //criando variaveis globais
     var alunos = []
-
-
 
     function Cadastrar() {
 
@@ -51,7 +51,7 @@
 
         //validações
         let erro = 0
-        if (nome_aluno.length < 9) {
+        if (nome_aluno.length < 2) {
             divNome.innerHTML = `O nome dever ter no minimo 9 caracteres`
             console.log("erro nos caracteres")
             erro++
@@ -114,6 +114,21 @@
         }
     }
 
+    function aluno() {
+        var nome = prompt("Inoforme o nome do aluno: ")
+        var aluno_nome = ''
+        var id = 0
+        for (let i = 0; i < alunos.length; i++) {
+            if (nome == alunos[i].nome) id = i
+        }
+
+        divAluno.innerHTML = `registro do aluno ${alunos[id].nome} solicitado: <br>
+        nota 1: ${alunos[id].n1} <br>
+        nota 2: ${alunos[id].n2} <br>
+        nota 3: ${alunos[id].n3} <br>`
+
+        console.log(alunos[id])
+    }
 </script>
 
 </html>
