@@ -27,6 +27,8 @@
     <div id="divlistar"></div><br>
     <button onclick="aluno()">ver aluno</button>
     <div id="divAluno"></div><br>
+    <button onclick="nota()">ver nota</button>
+    <div id="divNota"></div><br>
 
 
 
@@ -104,31 +106,48 @@
         if (ordem == 1) {
             for (let i = 0; i < alunos.length; i++) {
                 let media = (Number(nota1[i]) + Number(nota2[i]) + Number(nota3[i])) / 3
-                divlistar.innerHTML += `Aluno: ${alunos[i]} – N1: ${nota1[i]} – N2: ${nota2[i]} – N3: ${nota3[i]} – Média: 99,9 – YYYYY <br>`
+                divlistar.innerHTML += `Aluno: ${alunos[i]} – N1: ${nota1[i]} – N2: ${nota2[i]} – N3: ${nota3[i]} – Média: ${media} – YYYYY <br>`
             }
         } else {
             for (let i = alunos.length - 1; i > 0; i--) {
                 let media = (Number(nota1[i]) + Number(nota2[i]) + Number(nota3[i])) / 3
-                divlistar.innerHTML += `Aluno: ${alunos[i]} – N1: ${nota1[i]} – N2: ${nota2[i]} – N3: ${nota3[i]} – Média: 99,9 – YYYYY <br>`
+                divlistar.innerHTML += `Aluno: ${alunos[i]} – N1: ${nota1[i]} – N2: ${nota2[i]} – N3: ${nota3[i]} – Média: ${media} – YYYYY <br>`
             }
         }
     }
 
     function aluno() {
         var nome = prompt("Inoforme o nome do aluno: ")
-        var aluno_nome = ''
         var id = 0
         for (let i = 0; i < alunos.length; i++) {
             if (nome == alunos[i].nome) id = i
         }
 
-        divAluno.innerHTML = `registro do aluno ${alunos[id].nome} solicitado: <br>
-        nota 1: ${alunos[id].n1} <br>
-        nota 2: ${alunos[id].n2} <br>
-        nota 3: ${alunos[id].n3} <br>`
+        divAluno.innerHTML = `
+        Aluno: ${alunos[id].nome} – N1: ${alunos[id].n1} – N2: ${alunos[id].n2} – N3: ${alunos[id].n3} – Média: ${media} – Vendo aluno solicitado.`
 
         console.log(alunos[id])
     }
+
+    function nota() {
+        var nota = prompt("Qual a nota limite?")
+        var identi = []
+
+        for (let i = 0; i < alunos.length; i++) {
+
+            if (nota > alunos[i].n1 || nota > alunos[i].n2 || nota > alunos[i].n3) {
+                identi.push(i)
+            }
+        }
+        for (let i = 0; i < alunos.length; i++) {
+
+            divNota.innerHTML += `Aluno: ${alunos[id].nome} – N1: ${alunos[id].n1} – N2: ${alunos[id].n2} – N3: ${alunos[id].n3} – Média: ${media}  – Vendo alunos com a nota maior que ${nota}.
+            Onde: XXXXX é o nome do aluno cadastrado
+            YYYY é a ação realizada, p.e. Nota Maior que xx,x - Menor Média, etc`
+        }
+    }
+
+
 </script>
 
 </html>
